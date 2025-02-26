@@ -11,7 +11,6 @@ on:
 env:
   AWS_REGION : "eu-west-1"
   S3_BUCKET  : ${{ vars.S3_BUCKET }} #bucket where to download artifact
-  S3_BUCKET_CODEDEPLOY : ${{ vars.S3_BUCKET_CODEDEPLOY }} #bucket without slash
   ARTIFACT_NAME : artifact_1.0.0._${{github.run_number}}.zip
  
 permissions:
@@ -27,8 +26,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
-          role-to-assume: arn:aws:iam::052195330873:role/github-action-manually-role
-          role-session-name: GitHub_Action_Role
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Build artifact
@@ -37,7 +36,7 @@ jobs:
 
       - name: Upload artifact to S3 bucket
         run: |
-          aws s3 cp ${{env.ARTIFACT_NAME}} ${{ env.S3_BUCKET }}
+          aws s3 cp ${{env.ARTIFACT_NAME}} s3://${{ env.S3_BUCKET }}/
 
   deploy:
     needs: build
@@ -48,9 +47,9 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
-          role-to-assume: arn:aws:iam::052195330873:role/github-action-manually-role
-          role-session-name: GitHub_Action_Role
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
       - run: |
-         aws deploy create-deployment --application-name Test_application --deployment-group-name test-deployment-group --s3-location bucket=${{env.S3_BUCKET_CODEDEPLOY}},bundleType=zip,key=${{env.ARTIFACT_NAME}} --ignore-application-stop-failures
+         aws deploy create-deployment --application-name Test_application --deployment-group-name test-deployment-group --s3-location bucket=${{env.S3_BUCKET}},bundleType=zip,key=${{env.ARTIFACT_NAME}} --ignore-application-stop-failures
 
