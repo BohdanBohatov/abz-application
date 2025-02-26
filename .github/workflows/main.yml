@@ -32,7 +32,7 @@ jobs:
 
       - name: Build artifact
         run: |
-          zip -r ${{env.ARTIFACT_NAME}} application/ codedeploy_scripts/ appspec.yml
+          zip -r ${{env.ARTIFACT_NAME}} application/ scripts/ appspec.yml
 
       - name: Upload artifact to S3 bucket
         run: |
