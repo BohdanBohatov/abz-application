@@ -1,3 +1,3 @@
 #!/bin/bash
 
-touch /home/ec2-user/codedeploy.txt
+echo $PWD > /home/ec2-user/codedeploy.txt
