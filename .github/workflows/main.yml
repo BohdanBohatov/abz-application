@@ -51,5 +51,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
       - run: |
-         aws deploy create-deployment --application-name Test_application --deployment-group-name test-deployment-group --s3-location bucket=${{env.S3_BUCKET}},bundleType=zip,key=${{env.ARTIFACT_NAME}} --ignore-application-stop-failures
-
+         aws deploy create-deployment --application-name dev-wordpres-application --deployment-group-name dev-wordpress-deployment-group --s3-location bucket=${{env.S3_BUCKET}},bundleType=zip,key=${{env.ARTIFACT_NAME}} --ignore-application-stop-failures
