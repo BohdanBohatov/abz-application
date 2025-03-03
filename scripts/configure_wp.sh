@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 #TODO Modify wordpress
 #1. Select language maybe set wp_config.php file?
@@ -9,8 +10,6 @@
 #Page cache
 #Database cache
 #Object cache
-
-
 
 
 #Export env variables to script

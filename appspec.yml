@@ -6,7 +6,7 @@ files:
     destination: /home/ec2-user/codedeployscripts
 
 hooks:
-  BeforeInstall:
-    - location: scripts/configure_wp.sh
+  Install:
+    - location: /home/ec2-user/codedeployscripts/scripts/configure_wp.sh
       timeout: 500
       runas: root
