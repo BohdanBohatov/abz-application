@@ -10,9 +10,14 @@ on:
 
 env:
   AWS_REGION : "eu-west-1"
-  S3_BUCKET  : ${{ vars.S3_BUCKET }} #bucket where to download artifact
+  S3_BUCKET  : ${{ secrets.S3_BUCKET }} #bucket where to upload the artifact
   ARTIFACT_NAME : artifact_1.0.0._${{github.run_number}}.zip
- 
+  MYSQL_SECRET_ARN: ${{ secrets.MYSQL_SECRET_ARN }}
+  MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+  MYSQL_DB: ${{ secrets.MYSQL_DB }}
+  MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
+  
+  
 permissions:
       id-token: write
       contents: read
@@ -30,9 +35,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Create file to env variables in file
+        run: |
+          echo "MYSQL_SECRET_ARN=$MYSQL_SECRET_ARN" > .env
+          echo "MYSQL_HOST=$MYSQL_HOST" >> .env
+          echo "MYSQL_DB=$MYSQL_DB" >> .env
+          echo "MYSQL_PORT=$MYSQL_PORT" >> .env
+
       - name: Build artifact
         run: |
-          zip -r ${{env.ARTIFACT_NAME}} application/ scripts/ appspec.yml
+          zip -r ${{env.ARTIFACT_NAME}} application/ scripts/ appspec.yml .env
 
       - name: Upload artifact to S3 bucket
         run: |
