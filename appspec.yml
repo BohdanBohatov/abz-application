@@ -3,8 +3,7 @@ os: linux
 
 files:
   - source: /
-    destination: /home/ec2-user/codedeploy-data
-    file_exists_behavior: OVERWRITE
+    destination: /home/ec2-user/
 
 
 hooks:
