@@ -10,12 +10,12 @@ on:
 
 env:
   AWS_REGION : "eu-west-1"
-  S3_BUCKET  : ${{ secrets.S3_BUCKET }} #bucket where to upload the artifact
+  S3_BUCKET  : ${{ vars.S3_BUCKET }} #bucket where to upload the artifact
   ARTIFACT_NAME : artifact_1.0.0._${{github.run_number}}.zip
-  MYSQL_SECRET_ARN: ${{ secrets.MYSQL_SECRET_ARN }}
-  MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
-  MYSQL_DB: ${{ secrets.MYSQL_DB }}
-  MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
+  MYSQL_SECRET_ARN: ${{ vars.MYSQL_SECRET_ARN }}
+  MYSQL_HOST: ${{ vars.MYSQL_HOST }}
+  MYSQL_DB: ${{ vars.WORDPRESS_DB }}
+  MYSQL_PORT: ${{ vars.MYSQL_PORT }}
   
   
 permissions:
