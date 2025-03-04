@@ -13,14 +13,17 @@ set -e
 
 
 #Export env variables to script
+echo "Start script" > /var/log/customlog/debug.log
 source /home/ec2-user/codedeployscripts/.env
 
 #Retrive credentials from secrets manager to MySql DB
+echo "Retrive secrets" > /var/log/customlog/debug.log
 SECRET_VALUE=$(aws secretsmanager get-secret-value --secret-id "$MYSQL_SECRET_ARN" --query 'SecretString' --output text)
 
 MYSQL_USER=$(echo $SECRET_VALUE | jq -r '.username')
 MYSQL_PASSWORD=$(echo $SECRET_VALUE | jq -r '.password')
 
+echo "Move apache config file and change variables to correct" > /var/log/customlog/debug.log
 #Move apache configuration file to conf folder
 sudo mv /home/ec2-user/codedeployscripts/application/httpd.conf /etc/httpd/conf/httpd.conf
 sudo sed -i "s/\$WORDPRESS_DB/${WORDPRESS_DB}/"  /etc/httpd/conf/httpd.conf
@@ -31,9 +34,10 @@ sudo sed -i "s/\$MYSQL_PASSWORD/${MYSQL_PASSWORD}/"  /etc/httpd/conf/httpd.conf
 
 #sudo systemctl restart httpd
 
+echo "Create database for wordpress" > /var/log/customlog/debug.log
 #Create DB for WordPress
 mysql -h $MYSQL_HOST --password=$MYSQL_PASSWORD -u $MYSQL_USER --port=$MYSQL_PORT -D mysql -e "CREATE DATABASE IF NOT EXISTS \`${WORDPRESS_DB}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
-
+echo "Script ending" > /var/log/customlog/debug.log
 #Installing and activating cache plugin
 #sudo -u ec2-user -i -- wp plugin install w3-total-cache --activate --path=/var/www/html
