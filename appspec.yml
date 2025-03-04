@@ -2,8 +2,8 @@ version: 0.0
 os: linux
 
 files:
-  - source: /.env
-    destination: /home/ec2-user/codedeploy-data
+  - source: .env
+    destination: /home/ec2-user/
 
 
 hooks:
