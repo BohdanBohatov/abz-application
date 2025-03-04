@@ -2,10 +2,13 @@ version: 0.0
 os: linux
 
 files:
-  - source: application/httpd.conf
-    destination: /home/ec2-user/
   - source: .env
     destination: /home/ec2-user/
+  - source: application/httpd.conf
+    destination: /etc/httpd/conf/httpd.conf
+  - source: application/wp-config.php
+    destination: /var/www/html
+
 
 
 hooks:
