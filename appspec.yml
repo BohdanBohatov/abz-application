@@ -3,7 +3,7 @@ os: linux
 
 files:
   - source: scripts/
-    destination: /home/ec2-user/codedeployscripts
+    destination: /home/ec2-user/
 
 
 hooks:
