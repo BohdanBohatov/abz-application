@@ -14,7 +14,7 @@ set -e
 
 #Export env variables to script
 echo "Start script" > /var/log/debug.log
-source /home/ec2-user/codedeployscripts/.env
+source ../.env
 
 #Retrive credentials from secrets manager to MySql DB
 echo "Retrive secrets" > /var/log/debug.log
@@ -25,7 +25,7 @@ MYSQL_PASSWORD=$(echo $SECRET_VALUE | jq -r '.password')
 
 echo "Move apache config file and change variables to correct" > /var/log/debug.log
 #Move apache configuration file to conf folder
-sudo mv /home/ec2-user/codedeployscripts/application/httpd.conf /etc/httpd/conf/httpd.conf
+sudo mv ../application/httpd.conf /etc/httpd/conf/httpd.conf
 sudo sed -i "s/\$WORDPRESS_DB/${WORDPRESS_DB}/"  /etc/httpd/conf/httpd.conf
 sudo sed -i "s/\$MYSQL_HOST/${MYSQL_HOST}/"  /etc/httpd/conf/httpd.conf
 sudo sed -i "s/\$MYSQL_PORT/${MYSQL_PORT}/"  /etc/httpd/conf/httpd.conf
