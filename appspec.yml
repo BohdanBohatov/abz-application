@@ -3,9 +3,9 @@ os: linux
 
 files:
   - source: application/httpd.conf
-    destination: /home/ec2-user/
+    destination: /tmp/
   - source: .env
-    destination: /home/ec2-user/
+    destination: /tmp/
 
 
 hooks:
