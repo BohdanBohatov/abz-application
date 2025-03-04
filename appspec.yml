@@ -2,8 +2,12 @@ version: 0.0
 os: linux
 
 files:
-  - source: /
-    destination: /home/ec2-user/codedeployscripts
+  - source: /.env
+    destination: /home/ec2-user/codedeploy-data
+  - source: /application/httpd.conf
+    destination: /home/ec2-user/codedeploy-data
+  - source: /application/wp-config.php
+    destination: /home/ec2-user/codedeploy-data
 
 hooks:
   BeforeInstall:
