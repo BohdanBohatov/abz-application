@@ -23,16 +23,16 @@ PASSWORD=$(echo $SECRET_VALUE | jq -r '.password')
 
 #Move apache configuration file to conf folder
 sudo mv /home/ec2-user/codedeployscripts/application/httpd.conf /etc/httpd/conf/httpd.conf
-sed -i "s/\$MYSQL_DB/${MYSQL_DB}/"  /etc/httpd/conf/httpd.conf
-sed -i "s/\$MYSQL_HOST/${MYSQL_HOST}/"  /etc/httpd/conf/httpd.conf
-sed -i "s/\$MYSQL_PORT/${MYSQL_PORT}/"  /etc/httpd/conf/httpd.conf
-sed -i "s/\$MYSQL_USER/${USERNAME}/"  /etc/httpd/conf/httpd.conf
-sed -i "s/\$MYSQL_PASSWORD/${PASSWORD}/"  /etc/httpd/conf/httpd.conf
+sudo sed -i "s/\$WORDPRESS_DB/${WORDPRESS_DB}/"  /etc/httpd/conf/httpd.conf
+sudo sed -i "s/\$MYSQL_HOST/${MYSQL_HOST}/"  /etc/httpd/conf/httpd.conf
+sudo sed -i "s/\$MYSQL_PORT/${MYSQL_PORT}/"  /etc/httpd/conf/httpd.conf
+sudo sed -i "s/\$MYSQL_USER/${USERNAME}/"  /etc/httpd/conf/httpd.conf
+sudo sed -i "s/\$MYSQL_PASSWORD/${PASSWORD}/"  /etc/httpd/conf/httpd.conf
 
 #sudo systemctl restart httpd
 
 #Create DB for WordPress
-mysql -h $MYSQL_HOST --password=$MYSQL_PASSWORD -u $MYSQL_USER --port=$MYSQL_PORT -D mysql -e "CREATE DATABASE IF NOT EXISTS \`${MYSQL_DB}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+mysql -h $MYSQL_HOST --password=$MYSQL_PASSWORD -u $MYSQL_USER --port=$MYSQL_PORT -D mysql -e "CREATE DATABASE IF NOT EXISTS \`${WORDPRESS_DB}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
 
 #Installing and activating cache plugin

@@ -14,7 +14,7 @@ env:
   ARTIFACT_NAME : artifact_1.0.0._${{github.run_number}}.zip
   MYSQL_SECRET_ARN: ${{ vars.MYSQL_SECRET_ARN }}
   MYSQL_HOST: ${{ vars.MYSQL_HOST }}
-  MYSQL_DB: ${{ vars.WORDPRESS_DB }}
+  WORDPRESS_DB: ${{ vars.WORDPRESS_DB }}
   MYSQL_PORT: ${{ vars.MYSQL_PORT }}
   
   
@@ -39,7 +39,7 @@ jobs:
         run: |
           echo "MYSQL_SECRET_ARN=$MYSQL_SECRET_ARN" > .env
           echo "MYSQL_HOST=$MYSQL_HOST" >> .env
-          echo "MYSQL_DB=$MYSQL_DB" >> .env
+          echo "WORDPRESS_DB=$WORDPRESS_DB" >> .env
           echo "MYSQL_PORT=$MYSQL_PORT" >> .env
 
       - name: Build artifact
