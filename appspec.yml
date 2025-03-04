@@ -3,13 +3,13 @@ os: linux
 
 files:
   - source: application/httpd.conf
-    destination: /tmp/
+    destination: /home/ec2-user/
   - source: .env
-    destination: /tmp/
+    destination: /home/ec2-user/
 
 
 hooks:
-  BeforeInstall:
+  AfterInstall:
     - location: scripts/configure_wp.sh
       timeout: 500
       runas: root
