@@ -4,8 +4,7 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/codedeploy-data
-  - source: /application/httpd.conf
-    destination: /home/ec2-user/codedeploy-data-2
+    file_exists_behavior: OVERWRITE
 
 
 hooks:
