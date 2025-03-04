@@ -5,9 +5,9 @@ files:
   - source: .env
     destination: /home/ec2-user/
   - source: application/httpd.conf
-    destination: /etc/httpd/conf/httpd.conf
+    destination: /etc/httpd/conf/
   - source: application/wp-config.php
-    destination: /var/www/html
+    destination: /var/www/html/
 
 
 
