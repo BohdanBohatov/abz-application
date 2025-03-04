@@ -18,16 +18,16 @@ source /home/ec2-user/codedeployscripts/.env
 #Retrive credentials from secrets manager to MySql DB
 SECRET_VALUE=$(aws secretsmanager get-secret-value --secret-id "$MYSQL_SECRET_ARN" --query 'SecretString' --output text)
 
-USERNAME=$(echo $SECRET_VALUE | jq -r '.username')
-PASSWORD=$(echo $SECRET_VALUE | jq -r '.password')
+MYSQL_USER=$(echo $SECRET_VALUE | jq -r '.username')
+MYSQL_PASSWORD=$(echo $SECRET_VALUE | jq -r '.password')
 
 #Move apache configuration file to conf folder
 sudo mv /home/ec2-user/codedeployscripts/application/httpd.conf /etc/httpd/conf/httpd.conf
 sudo sed -i "s/\$WORDPRESS_DB/${WORDPRESS_DB}/"  /etc/httpd/conf/httpd.conf
 sudo sed -i "s/\$MYSQL_HOST/${MYSQL_HOST}/"  /etc/httpd/conf/httpd.conf
 sudo sed -i "s/\$MYSQL_PORT/${MYSQL_PORT}/"  /etc/httpd/conf/httpd.conf
-sudo sed -i "s/\$MYSQL_USER/${USERNAME}/"  /etc/httpd/conf/httpd.conf
-sudo sed -i "s/\$MYSQL_PASSWORD/${PASSWORD}/"  /etc/httpd/conf/httpd.conf
+sudo sed -i "s/\$MYSQL_USER/${MYSQL_USER}/"  /etc/httpd/conf/httpd.conf
+sudo sed -i "s/\$MYSQL_PASSWORD/${MYSQL_PASSWORD}/"  /etc/httpd/conf/httpd.conf
 
 #sudo systemctl restart httpd
 
