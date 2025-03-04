@@ -16,6 +16,7 @@ set -e
 echo "Start script" > /var/log/debug.log
 source /home/ec2-user/codedeploy-data/.env
 
+exit 0
 #Retrive credentials from secrets manager to MySql DB
 echo "Retrive secrets" >> /var/log/debug.log
 SECRET_VALUE=$(aws secretsmanager get-secret-value --secret-id "$MYSQL_SECRET_ARN" --query 'SecretString' --output text)
