@@ -26,7 +26,7 @@ define ( 'WPLANG', 'en_US' );
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', getenv('MYSQL_DB') );
+define( 'DB_NAME', getenv('WORDPRESS_DB') );
 
 /** Database username */
 define( 'DB_USER', getenv('MYSQL_USER') );
