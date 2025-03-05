@@ -22,7 +22,7 @@ echo "WORDPRESS_DB=$WORDPRESS_DB" >> /etc/environment
 echo "MYSQL_HOST=$MYSQL_HOST" >> /etc/environment
 echo "MYSQL_PORT=$MYSQL_PORT" >> /etc/environment
 echo "MYSQL_USER=$MYSQL_USER" >> /etc/environment
-echo "MYSQL_PASSWORD=$MYSQL_PASSWORD" >> /etc/environment
+echo "MYSQL_PASSWORD='$MYSQL_PASSWORD'" >> /etc/environment
 
 source /etc/environment
 
