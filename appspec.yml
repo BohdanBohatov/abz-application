@@ -8,6 +8,8 @@ files:
     destination: /etc/httpd/conf/
   - source: application/wp-config.php
     destination: /var/www/html/
+  - source: application/w3-cache-settings.json
+    destination: /home/ec2-user/
 file_exists_behavior: OVERWRITE
 
 

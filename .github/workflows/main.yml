@@ -16,6 +16,7 @@ env:
   MYSQL_HOST: ${{ vars.MYSQL_HOST }}
   WORDPRESS_DB: ${{ vars.WORDPRESS_DB }}
   MYSQL_PORT: ${{ vars.MYSQL_PORT }}
+  REDIS_URL: ${{ vars.REDIS_URL }}
   
   
 permissions:
@@ -35,12 +36,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Create file to env variables in file
+      - name: Create file to store environemt variables
         run: |
           echo "MYSQL_SECRET_ARN=$MYSQL_SECRET_ARN" > .env
           echo "MYSQL_HOST=$MYSQL_HOST" >> .env
           echo "WORDPRESS_DB=$WORDPRESS_DB" >> .env
           echo "MYSQL_PORT=$MYSQL_PORT" >> .env
+          echo "REDIS_URL=$REDIS_URL" >> .env
 
       - name: Build artifact
         run: |
