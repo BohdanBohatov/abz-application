@@ -4,8 +4,8 @@ os: linux
 files:
   - source: .env
     destination: /home/ec2-user/
-#  - source: application/httpd.conf
-#    destination: /etc/httpd/conf/
+  - source: application/httpd.conf
+    destination: /etc/httpd/conf/
   - source: application/wp-config.php
     destination: /var/www/html/
   - source: application/w3-cache-settings.json
