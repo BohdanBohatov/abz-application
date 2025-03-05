@@ -28,5 +28,5 @@ mysql -h $MYSQL_HOST --password=$MYSQL_PASSWORD -u $MYSQL_USER --port=$MYSQL_POR
 
 #Installing and configuring wordpress
 #TODO store password in secrets manager
-wp core install --url=example.com --title=Title --admin_user=admin --admin_password=passwd --admin_email=example@example.com --path=/var/www/html
+sudo -u ec2-user -i -- wp core install --url=example.com --title=Title --admin_user=admin --admin_password=passwd --admin_email=example@example.com --path=/var/www/html
 sudo -u ec2-user -i -- wp plugin install w3-total-cache --activate --path=/var/www/html
