@@ -8,13 +8,11 @@ files:
     destination: /etc/httpd/conf/
   - source: application/wp-config.php
     destination: /var/www/html/
-  - source: application/w3-cache-settings.json
-    destination: /home/ec2-user/
 file_exists_behavior: OVERWRITE
 
 
 hooks:
   AfterInstall:
-    - location: scripts/set_env_variables.sh
+    - location: scripts/configure_wp.sh
       timeout: 500
       runas: root

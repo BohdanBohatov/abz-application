@@ -5,6 +5,13 @@ define('WP_CACHE', true); // Added by W3 Total Cache
 #Set language
 define ( 'WPLANG', 'en_US' );
 
+#Redis cache configuration
+define( 'WP_REDIS_HOST', getenv('REDIS_URL'));
+define( 'WP_REDIS_PORT', 6379 ); 
+define( 'WP_REDIS_DATABASE', 0 ); #0-15 for each site different
+define( 'WP_REDIS_TIMEOUT', 1 );
+define( 'WP_REDIS_READ_TIMEOUT', 1 );
+
 /**
  * The base configuration for WordPress
  *
