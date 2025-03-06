@@ -17,6 +17,7 @@ sed -i "s/\$MYSQL_PORT/${MYSQL_PORT}/"  /etc/httpd/conf/httpd.conf
 sed -i "s/\$MYSQL_USER/${MYSQL_USER}/"  /etc/httpd/conf/httpd.conf
 sed -i "s/\$MYSQL_PASSWORD/${MYSQL_PASSWORD}/"  /etc/httpd/conf/httpd.conf
 
+#TODO check variables before
 echo "WORDPRESS_DB=$WORDPRESS_DB" >> /etc/environment
 echo "MYSQL_HOST=$MYSQL_HOST" >> /etc/environment
 echo "MYSQL_PORT=$MYSQL_PORT" >> /etc/environment
