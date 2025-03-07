@@ -60,6 +60,6 @@ ADMIN_SECRET=$(aws secretsmanager get-secret-value --secret-id "$WORDPRESS_CREDE
 ADMIN_USER=$(echo $ADMIN_SECRET | jq -r '.admin_name')
 ADMIN_PASSWORD=$(echo $ADMIN_SECRET | jq -r '.admin_password')
 
-sudo -u apache wp core install --url=alphabetagamazeta.site --title=Title --admin_user=admin --admin_password=passwd --admin_email=example@example.com --path=/var/www/html
+sudo -u apache wp core install --url=alphabetagamazeta.site --title=Title --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASSWORD --admin_email=example@example.com --path=/var/www/html
 sudo -u apache wp plugin install redis-cache --activate --path=/var/www/html
 sudo -u apache wp redis enable --path=/var/www/html
