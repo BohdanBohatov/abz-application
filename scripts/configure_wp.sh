@@ -38,11 +38,11 @@ for VAR_VALUE in "${!ENV_VARS[@]}"; do
         CURRENT_VALUE=$(grep "^$VAR_VALUE=" /etc/environment | cut -d'=' -f2-)
 
         # Only update if the value is different
-        if [ "$CURRENT_VALUE" != "$NEW_VALUE" ]; then
-            sed -i "s|^$VAR_VALUE=.*|$VAR_VALUE=$NEW_VALUE|" /etc/environment
+        if [ "$CURRENT_VALUE" != "'$NEW_VALUE'" ]; then
+            sed -i "s|^$VAR_VALUE=.*|$VAR_VALUE='$NEW_VALUE'|" /etc/environment
         fi
     else
-        echo "$VAR_VALUE=$NEW_VALUE" | sudo tee -a /etc/environment
+        echo "$VAR_VALUE='$NEW_VALUE'" | sudo tee -a /etc/environment
     fi
 done
 
