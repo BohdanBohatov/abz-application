@@ -12,6 +12,11 @@ define( 'WP_REDIS_DATABASE', 0 ); #0-15 for each site different
 define( 'WP_REDIS_TIMEOUT', 1 );
 define( 'WP_REDIS_READ_TIMEOUT', 1 );
 
+#Setting for supporting https
+if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+        $_SERVER['HTTPS'] = 'on';
+    }
+
 /**
  * The base configuration for WordPress
  *

@@ -17,6 +17,7 @@ env:
   WORDPRESS_DB: ${{ vars.WORDPRESS_DB }}
   MYSQL_PORT: ${{ vars.MYSQL_PORT }}
   REDIS_URL: ${{ vars.REDIS_URL }}
+  WORDPRESS_CREDENTIALS_SECRET_ARN: ${{ vars.WORDPRESS_CREDENTIALS_SECRET_ARN }}
   
   
 permissions:
@@ -43,6 +44,7 @@ jobs:
           echo "WORDPRESS_DB=$WORDPRESS_DB" >> .env
           echo "MYSQL_PORT=$MYSQL_PORT" >> .env
           echo "REDIS_URL=$REDIS_URL" >> .env
+          echo "WORDPRESS_CREDENTIALS_SECRET_ARN=$WORDPRESS_CREDENTIALS_SECRET_ARN" >> .env
 
       - name: Build artifact
         run: |
