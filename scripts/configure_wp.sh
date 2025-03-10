@@ -55,11 +55,17 @@ systemctl restart httpd
 #Create database for WordPress if it is not created
 mysql -h $MYSQL_HOST --password=$MYSQL_PASSWORD -u $MYSQL_USER --port=$MYSQL_PORT -D mysql -e "CREATE DATABASE IF NOT EXISTS \`${WORDPRESS_DB}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
-#Installing and configuring wordpress
-ADMIN_SECRET=$(aws secretsmanager get-secret-value --secret-id "$WORDPRESS_CREDENTIALS_SECRET_ARN" --query 'SecretString' --output text)
-ADMIN_USER=$(echo $ADMIN_SECRET | jq -r '.admin_name')
-ADMIN_PASSWORD=$(echo $ADMIN_SECRET | jq -r '.admin_password')
 
-sudo -u apache wp core install --url=alphabetagamazeta.site --title=Title --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASSWORD --admin_email=example@example.com --path=/var/www/html
-sudo -u apache wp plugin install redis-cache --activate --path=/var/www/html
-sudo -u apache wp redis enable --path=/var/www/html
+#Installing and configuring wordpress
+if ! sudo -u apache wp core is-installed --path=/var/www/html; then
+    ADMIN_SECRET=$(aws secretsmanager get-secret-value --secret-id "$WORDPRESS_CREDENTIALS_SECRET_ARN" --query 'SecretString' --output text)
+    ADMIN_USER=$(echo $ADMIN_SECRET | jq -r '.admin_name')
+    ADMIN_PASSWORD=$(echo $ADMIN_SECRET | jq -r '.admin_password')
+    sudo -u apache wp core install --url=alphabetagamazeta.site --title=Title --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASSWORD --admin_email=example@example.com --path=/var/www/html
+fi
+
+#Installing Redis cache plugin
+if ! sudo -u apache wp plugin is-installed --path=/var/www/html; then
+    sudo -u apache wp plugin install redis-cache --activate --path=/var/www/html
+    sudo -u apache wp redis enable --path=/var/www/html
+fi
