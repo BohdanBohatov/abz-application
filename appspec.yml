@@ -1,6 +1,7 @@
 version: 0.0
 os: linux
 
+#Move configuration files on proper path in host machine
 files:
   - source: .env
     destination: /home/ec2-user/
@@ -11,6 +12,7 @@ files:
 file_exists_behavior: OVERWRITE
 
 
+#Run script to configure wordpress
 hooks:
   AfterInstall:
     - location: scripts/configure_wp.sh
