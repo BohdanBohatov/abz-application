@@ -46,7 +46,7 @@ jobs:
           echo "REDIS_URL=$REDIS_URL" >> .env
           echo "WORDPRESS_CREDENTIALS_SECRET_ARN=$WORDPRESS_CREDENTIALS_SECRET_ARN" >> .env
 
-      - name: Build artifact
+      - name: Build artifact, create archive with required files
         run: |
           zip -r ${{env.ARTIFACT_NAME}} application/ scripts/ appspec.yml .env
 
